@@ -1,2 +1,2 @@
-<?php include 'menu.php' ?>
-<p>страница про таких как мы</p>
+<?php include "menu.php" ?>
+<h1>О нас</h1>
