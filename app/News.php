@@ -7,7 +7,7 @@ use App\Category;
 class News
 {
 
-    private static $news = [
+   /* private static $news = [
         [
             'id' => 43,
             'title' => 'Новость 1',
@@ -36,11 +36,17 @@ class News
             'category_id' => 2,
             'private' => false
         ]
-    ];
+    ];*/
 
     public static function getNews()
     {
-        return static::$news;
+        $arr=json_decode((\File::get(storage_path() . '\news.json')));
+        $news=[];
+        foreach ($arr as $item){
+            $news[]=(array)$item;
+        }
+        return $news;
+       // return static::$news;
     }
 
     /*
@@ -48,7 +54,7 @@ class News
      */
     public static function getNewsId($id)
     {
-        return static::$news[array_search($id, array_column(static::$news, 'id'))];
+        return static::getNews()[array_search($id, array_column(static::getNews(), 'id'))];
 
     }
 
@@ -56,7 +62,7 @@ class News
 
         $id = Category::getCategoryByName($name)['id'];
         $news = [];
-        foreach (static::$news as $item) {
+        foreach (static::getNews() as $item) {
             if ($item['category_id'] == $id) {
                 $news[] = $item;
             }

@@ -10,8 +10,8 @@ Route::group([
     'as' => 'admin.'
 ], function () {
     Route::get('/', 'IndexController@index')->name('index');
-    Route::get('/add', 'IndexController@add')->name('add');
-    Route::get('/test2', 'IndexController@test2')->name('test2');
+    Route::match(['get','post'], '/add', 'News\NewsController@add')->name('add');
+    Route::get('/test2', 'News\NewsController@test2')->name('test2');
 });
 
 Route::group([

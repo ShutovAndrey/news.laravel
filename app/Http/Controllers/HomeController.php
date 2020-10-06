@@ -23,14 +23,6 @@ class HomeController extends Controller
 
     public function about()
     {
-        $arr = (array)(\File::get(storage_path() . '\news.json'));
-        $el = [];
-        /*foreach ($arr as $item) {
-            $el[] = (array)$item;
-        }*/
-        dump($arr);
-        dump(gettype($arr));
-        // dump( \File::get(storage_path() . '\news.json'));
         return view('about');
     }
 }

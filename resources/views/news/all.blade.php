@@ -8,13 +8,20 @@
 
 @section('content')
 
-<h1>Новости</h1>
-<div>
-    <h3>Выберети категорию</h3>
-    <a href="{{ route('category', 'sport') }}"> Спорт</a>
-    <a href="{{ route('category', 'politics') }}">Политика</a>
-</div>
-<br>
+    <h1>Новости</h1>
+    <div>
+        <h3>Выберети категорию</h3>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a href="{{ route('category', 'sport') }} " class=" nav-link"> Спорт</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('category', 'politics') }} " class=" nav-link">Политика</a>
+            </li>
+        </ul>
+
+    </div>
+    <br>
 
     @forelse($news as $item)
         <h2>{{ $item['title'] }}</h2>

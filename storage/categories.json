@@ -1,0 +1,12 @@
+[
+    {
+        "id": 1,
+        "category_url": "sport",
+        "name": "Спорт"
+    },
+    {
+        "id": 2,
+        "category_url": "politics",
+        "name": "Политика"
+    }
+]

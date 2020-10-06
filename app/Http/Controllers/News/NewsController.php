@@ -8,8 +8,8 @@ use App\News;
 class NewsController
 {
     public function index() {
-      //  $arr = News::getNews();
-      //  \File::put(storage_path() . '\news.json' , json_encode($arr, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+     //   $arr = News::getNews();
+    //   \File::put(storage_path() . '\news.json' , json_encode($arr, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
         return view('news.all')->with('news', News::getNews());
     }
 
