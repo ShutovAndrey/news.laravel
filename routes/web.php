@@ -1,22 +1,28 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/about', 'HomeController@about')->name('about');
+Route::get('/contacts', 'HomeController@contacts')->name('contacts');
 
-Route::get('/', function () {
-    return view('index');
+Route::group([
+    'prefix' => 'admin',
+    'namespace'=> 'Admin',
+    'as' => 'admin.'
+], function () {
+    Route::get('/', 'IndexController@index')->name('index');
+    Route::match(['get','post'], '/add', 'News\NewsController@add')->name('add');
+    Route::get('/test2', 'News\NewsController@test2')->name('test2');
 });
-Route::get('/about', function () {
-    return view('about');
+
+Route::group([
+    'prefix' => 'news',
+    'namespace'=> 'News',
+], function () {
+Route::get('/', 'NewsController@index')->name('news.all');
+Route::get('/{id}', 'NewsController@show')->name('news.NewsOne');
+Route::get('/category/{theme}', 'NewsController@categoryNews')->name('category');
 });
-Route::get('/contacts', function () {
-    return view('contacts');
-});
+
+Auth::routes();
+
+//Route::get('/home', 'HomeController@index')->name('home');
