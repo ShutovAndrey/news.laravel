@@ -4,27 +4,55 @@
         "title": "Новость 1",
         "text": "ничего хорошего",
         "category_id": 1,
-        "private": false
+        "private": false,
+        "image": null
     },
     {
         "id": 58,
         "title": "Новость 2",
         "text": "так себе новость",
         "category_id": 1,
-        "private": false
+        "private": false,
+        "image": null
     },
     {
         "id": 76,
         "title": "Новость 3",
         "text": "и снова что-то не так",
         "category_id": 2,
-        "private": false
+        "private": false,
+        "image": null
     },
     {
         "id": 88,
         "title": "Новость 4",
         "text": "плохо",
         "category_id": 2,
-        "private": false
+        "private": false,
+        "image": null
+    },
+    {
+        "title": "one",
+        "category_id": "2",
+        "text": "catttttt",
+        "image": null,
+        "private": false,
+        "id": 4
+    },
+    {
+        "title": "sdfsf",
+        "category_id": "1",
+        "text": "sdfsdf",
+        "image": null,
+        "private": false,
+        "id": 5
+    },
+    {
+        "title": "zsc",
+        "category_id": "1",
+        "text": "zxc",
+        "image": null,
+        "private": false,
+        "id": 6
     }
 ]
