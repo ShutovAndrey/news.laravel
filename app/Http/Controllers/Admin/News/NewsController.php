@@ -33,14 +33,11 @@ class NewsController extends Controller
 
             ];
 
-         //  dd($news);
-
             DB::table('news')->insert($news);
-            $id = DB::table('news')->lastInsertId();
-            dd($id);
+            $id = DB::getPdo()->lastInsertId();
 
            // \File::put(storage_path() . '\news.json', json_encode($news, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
-         //  return redirect()->route('admin.add', $id)->with(['success'=> 'Новость добавлена!', 'id' => $id]);
+           return redirect()->route('admin.add', $id)->with(['success'=> 'Новость добавлена!', 'id' => $id]);
         }
         return view('admin.add'  , [
             'categories' => Category::getCategories()
