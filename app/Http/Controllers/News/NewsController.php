@@ -4,17 +4,20 @@ namespace App\Http\Controllers\News;
 
 use Illuminate\Http\Request;
 use App\News;
+use DB;
 
 class NewsController
 {
     public function index() {
-     //   $arr = News::getNews();
-    //   \File::put(storage_path() . '\news.json' , json_encode($arr, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
-        return view('news.all')->with('news', News::getNews());
+        $news=DB::table('news')->get();
+        return view('news.all')->with('news', $news);
     }
 
     public function show($id) {
-        return view('news.newsOne')->with('news', News::getNewsId($id));
+        //$news=DB::table('news')->where('id', '=', $id)->first();
+        $news=DB::table('news')->find($id);
+        //dd($news);
+        return view('news.newsOne')->with('news', $news);
     }
 
     public function categoryNews($name) {

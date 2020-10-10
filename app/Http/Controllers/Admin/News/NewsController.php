@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\News;
 use App\Category;
+use DB;
 
 class NewsController extends Controller
 {
@@ -14,28 +15,32 @@ class NewsController extends Controller
     {
         // $request->flash();
         if ($request->isMethod('post')) {
-            $requestArray = $request->except('_token');
-            $news = News::getNews();
-            $news[] = $requestArray;
-           // dd($request->file());
-            $url = null;
-           /* if ($request->file('image')) {
-                $path = \Storage::putFile('public', $request->file('image'));
-                $url = Storage::url($path);
-            }*/
+            $requestArray = $request->except('_token', 'category_id');
+           // dd($requestArray);  category_id нет
 
-            if ($request->image) {
+            $url = null;
+            if ($request->file('image')){
                 $path = Storage::putFile('public', $request->file('image'));
                 $url = Storage::url($path);
             }
 
-            $id = array_key_last($news);
-            $news[$id]['private'] = isset($requestArray['private']);
-            $news[$id]['id'] = $id;
-            $news[$id]['image'] = $url;
+            $news = [
+                'title' => $requestArray['title'],
+                'image' => $requestArray['image'],
+                'text' => $requestArray['text'],
+                'private' => isset($requestArray['private']),
+      //          'image'=> $url
 
-            \File::put(storage_path() . '\news.json', json_encode($news, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
-            return redirect()->route('admin.add', $id)->with(['success'=> 'Новость добавлена!', 'id' => $id]);
+            ];
+
+         //  dd($news);
+
+            DB::table('news')->insert($news);
+            $id = DB::table('news')->lastInsertId();
+            dd($id);
+
+           // \File::put(storage_path() . '\news.json', json_encode($news, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+         //  return redirect()->route('admin.add', $id)->with(['success'=> 'Новость добавлена!', 'id' => $id]);
         }
         return view('admin.add'  , [
             'categories' => Category::getCategories()

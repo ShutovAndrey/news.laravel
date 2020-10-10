@@ -54,5 +54,13 @@
         "image": null,
         "private": false,
         "id": 6
+    },
+    {
+        "title": "вы",
+        "category_id": "1",
+        "text": "ывп",
+        "image": "\/storage\/RhgQvxO1uV8W9XUx82qQyV6Xi2Noo8pamcChsdVy.jpeg",
+        "private": false,
+        "id": 7
     }
 ]

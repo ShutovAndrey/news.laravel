@@ -23,6 +23,7 @@ class News
      */
     public static function getNewsId($id)
     {
+       // dd(static::getNews()[array_search(7, array_column(static::getNews(), 'id'))]);
         return static::getNews()[array_search($id, array_column(static::getNews(), 'id'))];
 
     }

@@ -14,7 +14,8 @@
                     <div class="card-body">
                         <h2>Добавить новость</h2>
 
-                        <form method="POST" action="{{ route('admin.add') }}">
+                        <form method="POST" action="{{ route('admin.add') }}"
+                              enctype="multipart/form-data">
                             @csrf
 
                             <div>
