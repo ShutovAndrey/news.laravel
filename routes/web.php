@@ -9,7 +9,7 @@ Route::group([
     'namespace'=> 'Admin',
     'as' => 'admin.'
 ], function () {
-    Route::get('/', 'IndexController@index')->name('index');
+    Route::get('/', 'IndexController')->name('index');
     Route::match(['get','post'], '/add', 'News\NewsController@add')->name('add');
     Route::get('/test2', 'News\NewsController@test2')->name('test2');
 });
@@ -19,7 +19,7 @@ Route::group([
     'namespace'=> 'News',
 ], function () {
 Route::get('/', 'NewsController@index')->name('news.all');
-Route::get('/{id}', 'NewsController@show')->name('news.NewsOne');
+Route::get('/{news}', 'NewsController@show')->name('news.NewsOne');
 Route::get('/category/{theme}', 'NewsController@categoryNews')->name('category');
 });
 

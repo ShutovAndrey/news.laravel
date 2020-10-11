@@ -13,34 +13,33 @@ class NewsController extends Controller
 {
     public function add(Request $request)
     {
-        // $request->flash();
         if ($request->isMethod('post')) {
             $requestArray = $request->except('_token', 'category_id');
-           // dd($requestArray);  category_id нет
 
             $url = null;
-            if ($request->file('image')){
+            if ($request->file('image')) {
                 $path = Storage::putFile('public', $request->file('image'));
                 $url = Storage::url($path);
             }
 
-            $news = [
+           /* $news = [
                 'title' => $requestArray['title'],
-                'image' => $requestArray['image'],
+                'image' => $url,
                 'text' => $requestArray['text'],
                 'private' => isset($requestArray['private']),
-      //          'image'=> $url
+            ];*/
 
-            ];
+            $news=new News;
+            $news->image = $url;
+            $news->fill($request->except('image'))->save();
 
-            DB::table('news')->insert($news);
-            $id = DB::getPdo()->lastInsertId();
-
-           // \File::put(storage_path() . '\news.json', json_encode($news, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
-           return redirect()->route('admin.add', $id)->with(['success'=> 'Новость добавлена!', 'id' => $id]);
+           // $id = DB::table('news')->insertGetId($news);
+            return redirect()->route('admin.add', $news->id)
+                ->with(['success' => 'Новость добавлена!', 'id' => $news->id]);
         }
-        return view('admin.add'  , [
-            'categories' => Category::getCategories()
+
+        return view('admin.add', [
+            'categories' => Category::all()
         ]);
     }
 

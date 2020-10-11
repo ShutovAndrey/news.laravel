@@ -1,41 +1,27 @@
 <?php
 
 namespace App;
+use Illuminate\Database\Eloquent\Model;
 
-class Category
+class Category extends Model
 {
-   /* private static $categories = [
-        [
-            'id' => 1,
-            'category_url' => 'sport',
-            'name' => 'Спорт',
-        ],
-        [
-            'id' => 2,
-            'category_url' => 'politics',
-            'name' => 'Политика',
-        ]
+        protected $fillable = ['name', 'category_url'];
 
-    ];*/
-
-    public static function getCategories() {
+    /*public static function getCategories() {
         $arr=json_decode((\File::get(storage_path() . '\categories.json')));
         $categories=[];
         foreach ($arr as $item){
             $categories[]=(array)$item;
         }
         return $categories;
-
-      //  return static::$categories;
     }
 
     public static function getCategoryByName($name) {
-
         foreach (static::getCategories() as $category) {
             if ($category['category_url'] == $name) {
                 break;
             }
         }
         return $category;
-    }
+    }*/
 }
