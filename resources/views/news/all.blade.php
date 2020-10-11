@@ -22,9 +22,9 @@
 
     </div>
     <br>
-
+<div class="news-container">
     @forelse($news as $item)
-        <div class="news">
+        <div class="news-item">
             <h2>{{ $item->title }}</h2>
             <div class="news-img" style="background-image: url({{$item->image ?? asset('storage/def.jpg')}})">
             </div>
@@ -32,14 +32,13 @@
                 <a href="{{ route('news.NewsOne', $item->id) }}">Подробнее...</a><br>
             @endif
         </div>
-            <hr>
-            @empty
-                <p>Нет новостей</p>
+        <hr>
+    @empty
+        <p>Нет новостей</p>
 
     @endforelse
-
-
-
+</div>
+    {{ $news->links()  }}
 @endsection
 
 
