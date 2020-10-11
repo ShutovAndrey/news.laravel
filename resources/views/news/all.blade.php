@@ -24,14 +24,22 @@
     <br>
 
     @forelse($news as $item)
-        <h2>{{ $item['title'] }}</h2>
-        @if (!$item['private'])
-            <a href="{{ route('news.NewsOne', $item['id']) }}">Подробнее...</a><br>
-        @endif
-        <hr>
-    @empty
-        <p>Нет новостей</p>
+        <div class="news">
+            <h2>{{ $item->title }}</h2>
+            <div class="news-img" style="background-image: url({{$item->image ?? asset('storage/def.jpg')}})">
+            </div>
+            @if (!$item->private)
+                <a href="{{ route('news.NewsOne', $item->id) }}">Подробнее...</a><br>
+            @endif
+        </div>
+            <hr>
+            @empty
+                <p>Нет новостей</p>
+
     @endforelse
+
+
+
 @endsection
 
 
