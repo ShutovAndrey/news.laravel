@@ -11,6 +11,36 @@ use DB;
 
 class NewsController extends Controller
 {
+    public function index(News $news){
+        $news=News::query()->paginate(8);
+        return view('admin.news')->with('news', $news);
+    }
+
+    public function destroy (News $news){
+        $news->delete();
+        return redirect()->route('admin.index')->with('success', 'Новость удалена');
+    }
+
+    public function edit (News $news){
+        return view('admin.add', [
+            'news'=> $news,
+            'categories' => Category::all()
+        ]);
+    }
+
+    public function update (News $news, Request $request){
+        $url = null;
+        if ($request->file('image')) {
+            $path = Storage::putFile('public', $request->file('image'));
+            $url = Storage::url($path);
+        }
+
+        $news->image = $url;
+        $news->fill($request->except('image'))->save();
+        return redirect()->route('admin.add', $news->id)
+            ->with(['success' => 'Новость изменена!']);
+    }
+
     public function add(Request $request)
     {
         if ($request->isMethod('post')) {
@@ -22,13 +52,6 @@ class NewsController extends Controller
                 $url = Storage::url($path);
             }
 
-           /* $news = [
-                'title' => $requestArray['title'],
-                'image' => $url,
-                'text' => $requestArray['text'],
-                'private' => isset($requestArray['private']),
-            ];*/
-
             $news=new News;
             $news->image = $url;
             $news->fill($request->except('image'))->save();
@@ -39,15 +62,10 @@ class NewsController extends Controller
         }
 
         return view('admin.add', [
-            'categories' => Category::all()
+            'categories' => Category::all(),
+            'news' => new News(),
         ]);
     }
-
-    public function test2()
-    {
-        return view('admin.test2');
-    }
-
 
 }
 

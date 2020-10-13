@@ -12,34 +12,39 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h2>Добавить новость</h2>
+                        @if(!$news->id)  <h2>Добавить новость</h2>
+                        @else  <h2>Изменить новость</h2>
+                        @endif
 
-                        <form method="POST" action="{{ route('admin.add') }}"
+                        <form method="POST" action=" @if(!$news->id) {{ route('admin.add') }}
+                        @else {{ route('admin.update', $news) }} @endif"
                               enctype="multipart/form-data">
                             @csrf
 
                             <div>
                                 <label for="head_news">Заголовок новости</label>
                                 <input id="head_news" class="form-control" name="title" type="text" autofocus
-                                       value="{{ old('title') }}">
+                                       value="{{ old('title') ?? $news->title }}">
                             </div>
 
                             <div>
                                 <label for="category_news">Категория новости</label>
                                 <select name="category_id" id="category_news" class="form-control">
+
                                     @forelse($categories as $item)
-                                        <option @if ($item['id'] == old('category_id')) selected @endif value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                                        <option @if ($item->id == old('category_id'))value="{{ $item->id }}" selected
+                                                @elseif($item->id == $news->category_id) value="{{ $item->id }}" selected
+                                                @endif >{{ $item->name }}</option>
                                     @empty
                                         <option value="0">Нет категорий</option>
                                 @endforelse
-                                <!--<option>Спорт</option>
-                                    <option>Политика</option>-->
+
                                 </select>
                             </div>
 
                             <div>
                                 <label for="text_news">Текст новости</label>
-                                <textarea name="text" id="text_news" class="form-control"> {{ old('text') }} </textarea>
+                                <textarea name="text" id="text_news" class="form-control"> {{ old('text') ?? $news->text }} </textarea>
                             </div>
 
                             <div class="form-group">
@@ -48,8 +53,10 @@
 
                             <div>
                                 <label for="private">Приватная ?</label>
-                                <p><input id="private" type="checkbox"  @if (old('private')) checked @endif
-                                    class="form-check-label" name="private" value="1" >Private</p>
+                                <p><input id="private" type="checkbox" @if (old('private')) checked
+                                          @elseif ($news->private) checked
+                                          @endif
+                                    class="form-check-label" name="private" value="1">Private</p>
                             </div>
 
                             <button type="submit" class="btn btn-outline-dark">

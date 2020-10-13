@@ -10,8 +10,14 @@ use DB;
 class NewsController
 {
     public function index() {
-        $news=News::query()->paginate(3);
-        return view('news.all')->with('news', $news);
+       // $news=News::query()->paginate(3);
+        return view('news.all')->with(
+            [
+                'news'=> News::query()->paginate(3),
+                'category'=>Category::all()
+            ]);
+
+        //return view('news.all')->with('news', $news);
     }
 
     public function show(News $news) {
@@ -19,9 +25,12 @@ class NewsController
     }
 
     public function categoryNews($name) {
-      //  return view('news.all')->with('news', News::getNewsByCategoryName($name));
-       $category = Category::query()->where('category_url', 'sport');
-        return view('news.all')->with('news', $category);
+       $category = Category::query()->where('category_url', $name)->first();
+       //dd($category->news);
+        return view('news.all')->with([
+            'news'=> $category->news(),
+            'category'=>Category::all()
+        ]);
     }
 
 }

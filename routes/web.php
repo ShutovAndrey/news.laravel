@@ -9,9 +9,14 @@ Route::group([
     'namespace'=> 'Admin',
     'as' => 'admin.'
 ], function () {
-    Route::get('/', 'IndexController')->name('index');
+    Route::get('/', 'IndexController')->name('home');
+
     Route::match(['get','post'], '/add', 'News\NewsController@add')->name('add');
-    Route::get('/test2', 'News\NewsController@test2')->name('test2');
+    Route::get('/edit/{news}', 'News\NewsController@edit')->name('edit');
+    Route::post('/update/{news}', 'News\NewsController@update')->name('update');
+    Route::get('/destroy/{news}', 'News\NewsController@destroy')->name('destroy');
+    Route::get('/index', 'News\NewsController@index')->name('index');
+   // Route::resource('crudNews', 'News\CrudNewsController');
 });
 
 Route::group([

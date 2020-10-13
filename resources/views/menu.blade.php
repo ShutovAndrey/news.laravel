@@ -14,7 +14,7 @@
     <a class="nav-link"  href="{{ route('contacts') }}"> контакты</a>
 </li>
 
-<li  class="nav-item {{ request()->routeIs('admin.index')?'active':'' }}">
-    <a class="nav-link"  href="{{ route('admin.index') }}"> Админка</a>
+<li  class="nav-item {{ request()->routeIs('admin.home')?'active':'' }}">
+    <a class="nav-link"  href="{{ route('admin.home') }}"> Админка</a>
 </li>
 
