@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class News extends Model
 {
-    protected $fillable = ['title', 'text', 'private', 'image'];
+    protected $fillable = ['title', 'text', 'private', 'image', 'category_id'];
 
     public function category(){
         return $this->belongsTo(Category::class, 'category_id')->first();
