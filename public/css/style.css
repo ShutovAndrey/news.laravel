@@ -12,3 +12,12 @@
 
 
 }
+
+.can-see{
+    display: block;
+    margin: 10px;
+}
+.cant-see{
+    display: none;
+    margin: 10px;
+}

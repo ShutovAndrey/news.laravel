@@ -18,8 +18,16 @@
                         @forelse($news as $item)
                             <div class="news-item">
                                 <h3>{{ $item->title }}</h3>
-                                <a href="{{ route('admin.edit', $item) }}" type="button" class="btn btn-dark">Изменить</a>
-                                <a href="{{ route('admin.destroy', $item) }}" type="button" class="btn btn-danger">Удалить</a>
+
+                                <form method="post" action="{{ route('admin.news.destroy', $item) }}">
+                                    <a href="{{ route('admin.news.edit', $item) }}" type="button" class="btn btn-dark">Изменить</a>
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="submit" class="btn btn-danger" value="Удалить">
+                                </form>
+
+
+
                             </div>
                             <hr>
                         @empty
@@ -30,4 +38,5 @@
             </div>
         </div>
     </div>
+    {{ $news->links()  }}
 @endsection

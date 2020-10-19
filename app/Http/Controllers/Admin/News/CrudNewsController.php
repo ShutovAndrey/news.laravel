@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin\News;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\News;
+use App\Category;
 
 class CrudNewsController extends Controller
 {
@@ -12,9 +14,10 @@ class CrudNewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(News $news)
     {
-        //
+        $news=News::query()->paginate(8);
+        return view('admin.news')->with('news', $news);
     }
 
     /**
@@ -22,9 +25,28 @@ class CrudNewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        if ($request->isMethod('post')) {
+            $url = null;
+            if ($request->file('image')) {
+                $path = Storage::putFile('public', $request->file('image'));
+                $url = Storage::url($path);
+            }
+
+            $news=new News;
+            $news->image = $url;
+            $request->validate(News::rules(), [], News::attributes());
+            $news->fill($request->except('image'))->save();
+
+            return redirect()->route('admin.news.create', $news->id)
+                ->with(['success' => 'Новость добавлена!', 'id' => $news->id]);
+        }
+
+        return view('admin.create', [
+            'categories' => Category::all(),
+            'news' => new News(),
+        ]);
     }
 
     /**
@@ -55,9 +77,12 @@ class CrudNewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(News $news)
     {
-        //
+        return view('admin.create', [
+            'news'=> $news,
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -67,9 +92,19 @@ class CrudNewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(News $news, Request $request)
     {
-        //
+        //   dd($request);
+        $url = null;
+        if ($request->file('image')) {
+            $path = Storage::putFile('public', $request->file('image'));
+            $url = Storage::url($path);
+        }
+
+        $news->image = $url;
+        $news->fill($request->except('image'))->save();
+        return redirect()->route('admin.news.create')
+            ->with(['success' => 'Новость изменена!', 'id' => $news->id]);
     }
 
     /**
@@ -78,8 +113,10 @@ class CrudNewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(News $news)
     {
-        //
+        // dd($news);
+        $news->delete();
+        return redirect()->route('admin.news.index')->with('success', 'Новость удалена');
     }
 }

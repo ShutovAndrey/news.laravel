@@ -18,3 +18,7 @@
     <a class="nav-link"  href="{{ route('admin.home') }}"> Админка</a>
 </li>
 
+<li  class="nav-item {{ request()->routeIs('profileUpdate')?'active':'' }}">
+    <a class="nav-link"  href="{{ route('profileUpdate') }}"> Профиль</a>
+</li>
+

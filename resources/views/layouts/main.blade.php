@@ -84,7 +84,7 @@
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     {{ session('success') }} <br>
 
-                    @if(session('id'))
+                @if(session('id'))
                         <a href="{{ route('news.NewsOne', session('id')) }}">Перейти</a><br>
                     @endif
 

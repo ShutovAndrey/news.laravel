@@ -17,6 +17,7 @@ class NewsController extends Controller
     }
 
     public function destroy (News $news){
+       // dd($news);
         $news->delete();
         return redirect()->route('admin.index')->with('success', 'Новость удалена');
     }
@@ -29,6 +30,7 @@ class NewsController extends Controller
     }
 
     public function update (News $news, Request $request){
+     //   dd($request);
         $url = null;
         if ($request->file('image')) {
             $path = Storage::putFile('public', $request->file('image'));
@@ -37,15 +39,13 @@ class NewsController extends Controller
 
         $news->image = $url;
         $news->fill($request->except('image'))->save();
-        return redirect()->route('admin.add', $news->id)
-            ->with(['success' => 'Новость изменена!']);
+        return redirect()->route('admin.add')
+            ->with(['success' => 'Новость изменена!', 'id' => $news->id]);
     }
 
     public function add(Request $request)
     {
         if ($request->isMethod('post')) {
-            $requestArray = $request->except('_token', 'category_id');
-
             $url = null;
             if ($request->file('image')) {
                 $path = Storage::putFile('public', $request->file('image'));
@@ -54,9 +54,9 @@ class NewsController extends Controller
 
             $news=new News;
             $news->image = $url;
+            $request->validate(News::rules(), [], News::attributes());
             $news->fill($request->except('image'))->save();
 
-           // $id = DB::table('news')->insertGetId($news);
             return redirect()->route('admin.add', $news->id)
                 ->with(['success' => 'Новость добавлена!', 'id' => $news->id]);
         }

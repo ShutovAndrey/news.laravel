@@ -13,9 +13,10 @@
         @if ($category)
             <ul class="nav nav-tabs">
                 @forelse($category as $item)
-                    <li class="nav-item {{ request()->routeIs('category/'.$item['name'])?'active':'' }}"> <!--докрутить -->
-                        <a href="{{ route('category', $item['category_url']) }}"
-                           class=" nav-link">{{ $item['name'] }}</a>
+                    <li class="nav-item "> <!--докрутить -->
+                        <a href="{{ route('category', $item['category_url']) }}" class=" nav-link">
+                            {{ $item['name'] }}
+                        </a>
                     </li>
                 @empty
                     Новости без категорий
