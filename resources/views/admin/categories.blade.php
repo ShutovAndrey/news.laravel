@@ -40,20 +40,20 @@
                                             </div>
                                         @endif
 
-                                            <fieldset>
-                                                <input type="text" id="edit_category" class="form-control
+                                        <fieldset>
+                                            <input type="text" id="edit_category" class="form-control
                                 @if($errors->has('name')) form-control is-invalid @endif " name="name"
-                                               autofocus
-                                               value="{{ old('name') ?? $item->name }}">
-                                                <input type="hidden" id="edit_category" name="id" value="{{ $item->id }}">
-                                                <label for="edit_category"></label>
+                                                   autofocus
+                                                   value="{{ old('name') ?? $item->name }}">
+                                            <input type="hidden" id="edit_category" name="id" value="{{ $item->id }}">
+                                            <label for="edit_category"></label>
 
 
-                                                <button type="submit" class="btn btn-dark">
-                                                    Готово
-                                                </button>
+                                            <button type="submit" class="btn btn-dark">
+                                                Готово
+                                            </button>
 
-                                            </fieldset>
+                                        </fieldset>
                                     </div>
 
 
@@ -70,17 +70,5 @@
             </div>
         </div>
     </div>
-
-    <script>
-        window.onload = function () {
-            let buttons = document.querySelectorAll('#edit_category');
-            buttons.forEach((elem) => {
-                elem.addEventListener('click', () => {
-                    let $parts = $(this).closest('.categories-container').find('.cant-see');
-                    $parts.toggleClass('can-see');
-                })
-            });
-        }
-    </script>
 
 @endsection

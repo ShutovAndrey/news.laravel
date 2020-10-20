@@ -66,20 +66,22 @@
                                 <label for="password" class="col-md-4 col-form-label text-md-right">Старый пароль</label>
 
                                 <div class="col-md-6">
+                                    @if($errors->has('password'))
+                                        <div class="alert-danger">
+                                            @foreach($errors->get('password') as $error)
+                                                <p>{{$error}}</p>
+                                            @endforeach
+                                        </div>
+                                    @endif
                                     <input id="password" type="password" class="form-control @if($errors->has('password')) is-invalid @endif" name="password" >
 
-                                    @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label for="password-confirm" class="col-md-4 col-form-label text-md-right">Новый пароль</label>  <!-- запросить два раза -->
 
-                                <div class="col-md-6">
+                                <div class="col-md-6" >
                                     @if($errors->has('newPassword'))
                                         <div class="alert-danger">
                                             @foreach($errors->get('newPassword') as $error)
@@ -87,7 +89,7 @@
                                             @endforeach
                                         </div>
                                     @endif
-                                    <input id="password-confirm"  class="form-control @if($errors->has('newPassword')) is-invalid @endif" name="newPassword">
+                                    <input id="password-confirm"  type="password"  class="form-control @if($errors->has('newPassword')) is-invalid @endif" name="newPassword">
                                 </div>
                             </div>
 

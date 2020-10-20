@@ -14,3 +14,7 @@
     <a class="nav-link" href="{{ route('admin.category.index') }}">Редактор категорий</a>
 </li>
 
+<li class="nav-item {{ request()->routeIs('admin.users.index')?'active':'' }}">
+    <a class="nav-link" href="{{ route('admin.users.index') }}">Пользователи</a>
+</li>
+

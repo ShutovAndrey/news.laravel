@@ -9,18 +9,18 @@ Route::group([
     'prefix' => 'admin',
     'namespace'=> 'Admin',
     'as' => 'admin.',
-    'middleware' => 'auth'
+    'middleware' => ['auth', 'is_admin']
 ], function () {
     Route::get('/', 'IndexController')->name('home');
+    Route::get('/users/toggleAdmin/{user}', 'UsersController@toggleAdmin')->name('toggleAdmin');
+    Route::get('/users', 'UsersController@index')->name('users.index');
+    Route::get('/users/destroy/{user}', 'UsersController@destroy')->name('users.destroy');
+    Route::get('/users/edit/{user}', 'UsersController@edit')->name('users.edit');
+    Route::get('/users/update/{user}', 'UsersController@update')->name('users.update');
 
-  //  Route::match(['get','post'], '/add', 'News\NewsController@add')->name('add');
-   // Route::get('/edit/{news}', 'News\NewsController@edit')->name('edit');
-   // Route::post('/update/{news}', 'News\NewsController@update')->name('update');
-  //  Route::get('/destroy/{news}', 'News\NewsController@destroy')->name('destroy');
-  //  Route::get('/index', 'News\NewsController@index')->name('index');
     Route::resource('/news', 'News\CrudNewsController')->except(['show']);
 
-    Route::get('/categories', 'CategoryController@index')->name('category.index');
+    Route::get('/categories', 'CategoryController@index')->name('category.index'); //собрать все это в ресурс
     Route::get('/categories/edit/', 'CategoryController@edit')->name('category.edit');
     Route::get('/categories/destroy/{category}', 'CategoryController@destroy')->name('category.destroy');
     Route::post('/categories/update', 'CategoryController@update')->name('category.update');

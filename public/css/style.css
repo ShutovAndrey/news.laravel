@@ -5,14 +5,8 @@
 
 .news-container{
     width: 90%;
-   /* display: flex;*/
     margin: 0 auto;
 }
-.news-item{
-
-
-}
-
 .can-see{
     display: block;
     margin: 10px;
@@ -20,4 +14,7 @@
 .cant-see{
     display: none;
     margin: 10px;
+}
+.invisible{
+    display: none;
 }
