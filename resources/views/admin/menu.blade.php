@@ -18,3 +18,7 @@
     <a class="nav-link" href="{{ route('admin.users.index') }}">Пользователи</a>
 </li>
 
+<li class="nav-item {{ request()->routeIs('admin.parser')?'active':'' }}">
+    <a class="nav-link" href="{{ route('admin.parser') }}">Парсить новости</a>
+</li>
+

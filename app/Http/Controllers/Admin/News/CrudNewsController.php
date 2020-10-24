@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\News;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use App\News;
 use App\Category;
 
@@ -25,24 +26,8 @@ class CrudNewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        if ($request->isMethod('post')) {
-            $url = null;
-            if ($request->file('image')) {
-                $path = Storage::putFile('public', $request->file('image'));
-                $url = Storage::url($path);
-            }
-
-            $news=new News;
-            $news->image = $url;
-            $request->validate(News::rules(), [], News::attributes());
-            $news->fill($request->except('image'))->save();
-
-            return redirect()->route('admin.news.create', $news->id)
-                ->with(['success' => 'Новость добавлена!', 'id' => $news->id]);
-        }
-
         return view('admin.create', [
             'categories' => Category::all(),
             'news' => new News(),
@@ -57,7 +42,17 @@ class CrudNewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $url = null;
+        if ($request->file('image')) {
+            $path = Storage::putFile('public', $request->file('image'));
+            $url = Storage::url($path);
+        }
+        $request->validate(News::rules(), [], News::attributes());
+        $news=new News;
+        $news->image = $url;
+        $news->fill($request->except('image'))->save();
+        return redirect()->route('admin.news.create', $news->id)
+            ->with(['success' => 'Новость добавлена!', 'id' => $news->id]);
     }
 
     /**

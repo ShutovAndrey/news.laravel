@@ -7,11 +7,11 @@
 </li>
 
 <li class="nav-item {{ request()->routeIs('about')?'active':'' }}">
-    <a class="nav-link" href="{{ route('about') }}"> о нас</a>
+    <a class="nav-link" href="{{ route('about') }}"> О Нас</a>
 </li>
 
 <li class="nav-item {{ request()->routeIs('contacts')?'active':'' }}">
-    <a class="nav-link" href="{{ route('contacts') }}"> контакты</a>
+    <a class="nav-link" href="{{ route('contacts') }}"> Контакты</a>
 </li>
 @if(Auth::user())
     @if(Auth::user()->is_admin)

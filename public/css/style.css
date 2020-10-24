@@ -7,14 +7,13 @@
     width: 90%;
     margin: 0 auto;
 }
-.can-see{
-    display: block;
-    margin: 10px;
-}
-.cant-see{
-    display: none;
-    margin: 10px;
-}
+
 .invisible{
     display: none;
+}
+.delete-btn{
+    display: inline-block;
+    border: none;
+    padding: 0;
+    height: 15px;
 }

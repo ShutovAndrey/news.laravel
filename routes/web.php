@@ -3,6 +3,8 @@
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/contacts', 'HomeController@contacts')->name('contacts');
+Route::get('/auth/vk', 'LoginController@loginVK')->name('loginVK');
+Route::get('/auth/vk/response', 'LoginController@responseVK')->name('responseVK');
 Route::match(['get','post'], '/profile', 'ProfileController@update')->name('profileUpdate');
 
 Route::group([
@@ -13,6 +15,7 @@ Route::group([
 ], function () {
     Route::get('/', 'IndexController')->name('home');
     Route::get('/users/toggleAdmin/{user}', 'UsersController@toggleAdmin')->name('toggleAdmin');
+    Route::get('/parser', 'ParserController@index')->name('parser');
     Route::get('/users', 'UsersController@index')->name('users.index');
     Route::get('/users/destroy/{user}', 'UsersController@destroy')->name('users.destroy');
     Route::get('/users/edit/{user}', 'UsersController@edit')->name('users.edit');

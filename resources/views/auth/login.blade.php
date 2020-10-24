@@ -54,6 +54,11 @@
                                         {{ __('Remember Me') }}
                                     </label>
                                 </div>
+
+                                <div>
+                                    <a href="{{ route('loginVK') }}"><img src="vk.png" alt="vk" width="40px"></a>
+                                </div>
+
                             </div>
                         </div>
 

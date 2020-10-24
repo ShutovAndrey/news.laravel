@@ -1,74 +1,74 @@
 @extends('layouts.main')
-
 @section('title', 'Редактор категорий')
-
 @section('menu')
-    @include('admin.menu')
+@include('admin.menu')
 @endsection
-
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h2>Редактор категорий</h2>
-                    </div>
-                    <div class="categories-container">
-
-                        @forelse($categories as $item)
-
-                            <div class="news-item can-see">
-                                <h3>{{ $item->name }}</h3>
-                                <a href=""
-                                   id="edit_category_{{$item->id}}" type="button" class="btn btn-dark">Изменить</a>
-                                <a href="{{ route('admin.category.destroy', $item) }}" type="button"
-                                   class="btn btn-danger">Удалить</a>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Редактор категорий</h2>
+                </div>
+                <div class="categories-container">
+                    @forelse($categories as $item)
+                    <div class="category-item">
+                        <div class="news-item can-see">
+                            <h3>{{ $item->name }}</h3>
+                            <button type="button" class="btn btn-dark switch "> Изменить </button>
+                            <form action="{{ route('admin.category.destroy', $item) }}" method="delete">
+                                <button type="submit" class="btn btn-danger">
+                                Удалить
+                                </button>
+                            </form>
+                        </div>
+                        <div class="cant-see">
+                            <div>
+                                @if($errors->has('name'))
+                                <div class="alert-danger">
+                                    @foreach($errors->get('name') as $error)
+                                    <p>{{$error}}</p>
+                                    @endforeach
+                                </div>
+                                @endif
                             </div>
-
-                            <div class="can-see">
-                                <form method="POST" action="{{ route('admin.category.update', $item) }}"
-                                      enctype="multipart/form-data">
-                                    @csrf
-
-                                    <div>
-                                        @if($errors->has('name'))
-                                            <div class="alert-danger">
-                                                @foreach($errors->get('name') as $error)
-                                                    <p>{{$error}}</p>
-                                                @endforeach
-                                            </div>
-                                        @endif
-
-                                        <fieldset>
-                                            <input type="text" id="edit_category" class="form-control
+                            <form method="POST" action="{{ route('admin.category.update', $item) }}"
+                                enctype="multipart/form-data">
+                                @csrf
+                                <input type="text" id="edit_category" class="form-control
                                 @if($errors->has('name')) form-control is-invalid @endif " name="name"
-                                                   autofocus
-                                                   value="{{ old('name') ?? $item->name }}">
-                                            <input type="hidden" id="edit_category" name="id" value="{{ $item->id }}">
-                                            <label for="edit_category"></label>
+                                autofocus
+                                value="{{ old('name') ?? $item->name }}">
+                                <input type="hidden" id="edit_category" name="id" value="{{ $item->id }}">
+                                <label for="edit_category"></label>
+                                <button type="submit" class="btn btn-dark">
+                                Готово
+                                </button>
+                            </form>
 
-
-                                            <button type="submit" class="btn btn-dark">
-                                                Готово
-                                            </button>
-
-                                        </fieldset>
-                                    </div>
-
-
-                                </form>
-
-                            </div>
-                            <hr>
-                        @empty
-                            <p>Нет категорий</p>
-                        @endforelse
-
+                        </div>
+                        <hr>
                     </div>
+                    @empty
+                    <p>Нет категорий</p>
+                    @endforelse
                 </div>
             </div>
         </div>
     </div>
 
+</div>
+<script>
+"use strict";
+const buttonItems = document.querySelectorAll('.switch');
+for (let button of buttonItems) {
+    console.log(button)
+button.addEventListener('click', (evt) =>{
+//console.log(evt.target.parentElement.parentNode)
+evt.target.parentElement.parentNode.querySelector('.cant-see').classList.toggle('invisible');
+evt.target.parentElement.parentNode.querySelector('.can-see').classList.toggle('invisible');
+});
+}
+</script>
 @endsection

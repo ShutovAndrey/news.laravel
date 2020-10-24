@@ -16,7 +16,7 @@
                         @else  <h2>Изменить новость</h2>
                         @endif
 
-                        <form method="POST" action=" @if(!$news->id) {{ route('admin.news.create') }}
+                        <form method="POST" action=" @if(!$news->id) {{ route('admin.news.store') }}
                         @else {{ route('admin.news.update', $news) }} @endif"
                               enctype="multipart/form-data">
                             @csrf
