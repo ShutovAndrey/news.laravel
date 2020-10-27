@@ -27,7 +27,9 @@ class AlterTableNewsAddCategory extends Migration
      */
     public function down()
     {
-        $table->dropForeign(['category_id']);
-        $table->dropColumn(['category_id']);
+        Schema::table('news', function (Blueprint $table) {
+            $table->dropForeign(['category_id']);
+            $table->dropColumn(['category_id']);
+        });
     }
 }

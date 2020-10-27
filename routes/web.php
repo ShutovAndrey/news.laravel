@@ -4,7 +4,13 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/contacts', 'HomeController@contacts')->name('contacts');
 Route::get('/auth/vk', 'LoginController@loginVK')->name('loginVK');
+Route::get('/auth/gh', 'LoginController@loginGH')->name('loginGH');
+Route::get('/auth/yandex', 'LoginController@loginYandex')->name('loginYandex');
+Route::get('/auth/loginInsta', 'LoginController@loginInsta')->name('loginInsta');
 Route::get('/auth/vk/response', 'LoginController@responseVK')->name('responseVK');
+Route::get('/auth/yandex/response', 'LoginController@responseYandex')->name('responseYandex');
+Route::get('/auth/instagram/response', 'LoginController@responseInsta')->name('responseInsta');
+Route::get('/auth/github/response', 'LoginController@responseGH')->name('responseGH');
 Route::match(['get','post'], '/profile', 'ProfileController@update')->name('profileUpdate');
 
 Route::group([
