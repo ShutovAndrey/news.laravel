@@ -56,10 +56,9 @@
                                 </div>
 
                                 <div>
-                                    <a href="{{ route('loginVK') }}"><img src="vk.png" alt="vk" width="40px"></a>
-                                    <a href="{{ route('loginGH') }}"><img src="gh.png" alt="gh" width="30px"></a>
-                                    <a href="{{ route('loginInsta') }}"><img src="inst.png" alt="inst" width="30px"></a>
-                                    <a href="{{ route('loginYandex') }}"><img src="yandex.png" alt="yandex" width="30px"></a>
+                                    <a href="{{ route('loginSocial', 'vkontakte') }}"><img src="vk.png" alt="vk" width="40px"></a>
+                                    <a href="{{ route('loginSocial', 'github') }}"><img src="gh.png" alt="gh" width="30px"></a>
+                                    <a href="{{ route('loginSocial', 'yandex') }}"><img src="yandex.png" alt="yandex" width="30px"></a>
                                 </div>
 
                             </div>

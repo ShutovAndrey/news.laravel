@@ -3,15 +3,12 @@
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/contacts', 'HomeController@contacts')->name('contacts');
-Route::get('/auth/vk', 'LoginController@loginVK')->name('loginVK');
-Route::get('/auth/gh', 'LoginController@loginGH')->name('loginGH');
-Route::get('/auth/yandex', 'LoginController@loginYandex')->name('loginYandex');
-Route::get('/auth/loginInsta', 'LoginController@loginInsta')->name('loginInsta');
-Route::get('/auth/vk/response', 'LoginController@responseVK')->name('responseVK');
-Route::get('/auth/yandex/response', 'LoginController@responseYandex')->name('responseYandex');
-Route::get('/auth/instagram/response', 'LoginController@responseInsta')->name('responseInsta');
-Route::get('/auth/github/response', 'LoginController@responseGH')->name('responseGH');
+Route::get('/auth/{social}', 'LoginController@loginSocial')->name('loginSocial');
+Route::get('/auth/{social}/response', 'LoginController@responseSocial')->name('responseSocial');
 Route::match(['get','post'], '/profile', 'ProfileController@update')->name('profileUpdate');
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth', 'is_admin']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
 
 Route::group([
     'prefix' => 'admin',
@@ -22,6 +19,8 @@ Route::group([
     Route::get('/', 'IndexController')->name('home');
     Route::get('/users/toggleAdmin/{user}', 'UsersController@toggleAdmin')->name('toggleAdmin');
     Route::get('/parser', 'ParserController@index')->name('parser');
+    Route::get('/rsslink', 'ParserController@create')->name('rsslink');
+    Route::post('/rssStore', 'ParserController@rssStore')->name('rssStore');
     Route::get('/users', 'UsersController@index')->name('users.index');
     Route::get('/users/destroy/{user}', 'UsersController@destroy')->name('users.destroy');
     Route::get('/users/edit/{user}', 'UsersController@edit')->name('users.edit');

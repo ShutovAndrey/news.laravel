@@ -13,10 +13,12 @@
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
         "orchestra/parser": "^3.8",
+        "predis/predis": "^1.1",
         "socialiteproviders/github": "^1.0",
         "socialiteproviders/instagram": "^3.0",
         "socialiteproviders/vkontakte": "^4.1",
-        "socialiteproviders/yandex": "^3.1"
+        "socialiteproviders/yandex": "^3.1",
+        "unisharp/laravel-filemanager": "^2.1"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.8",

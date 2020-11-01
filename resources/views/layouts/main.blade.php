@@ -22,7 +22,7 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 <body>
-<div id="app">
+<div>
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
@@ -54,6 +54,7 @@
                             </li>
                         @endif
                     @else
+                       @if(Auth::User()->avatar) <img src="{{ Auth::User()->avatar }}" width="40px" alt="avatar">  @endif
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

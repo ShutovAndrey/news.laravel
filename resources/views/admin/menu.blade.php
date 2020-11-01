@@ -22,3 +22,7 @@
     <a class="nav-link" href="{{ route('admin.parser') }}">Парсить новости</a>
 </li>
 
+<li class="nav-item {{ request()->routeIs('admin.rsslink')?'active':'' }}">
+    <a class="nav-link" href="{{ route('admin.rsslink') }}">Добавить ссылку</a>
+</li>
+
