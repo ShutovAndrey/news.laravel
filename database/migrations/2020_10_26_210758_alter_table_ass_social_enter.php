@@ -17,7 +17,7 @@ class AlterTableAssSocialEnter extends Migration
             $table->string('social_id',20)->default('');
             $table->index('social_id');
             $table->string('avatar',250)->default('');
-            $table->enum('type_auth', ['site', 'vkontakte', 'git', 'yandex'])->default('site');
+            $table->enum('type_auth', ['site', 'vkontakte', 'github', 'yandex'])->default('site');
 
         });
     }

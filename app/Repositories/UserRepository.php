@@ -24,6 +24,7 @@ class UserRepository
                 'email_verified_at' => now(),
                 'avatar' => !empty($user->getAvatar())? $user->getAvatar(): ''
             ]);
+          //  dd($useInSystem);
             $useInSystem -> save();
         }
         return $useInSystem;
