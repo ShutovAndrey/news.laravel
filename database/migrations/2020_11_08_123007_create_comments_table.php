@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateParsingResourseTable extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateParsingResourseTable extends Migration
      */
     public function up()
     {
-        Schema::create('parsing_resourses', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->text('comment');
+            $table->unsignedBigInteger('news_id');
+            $table->foreign('news_id')->references('id')->on('news')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
@@ -26,6 +30,6 @@ class CreateParsingResourseTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('parsing_resourses');
+        Schema::dropIfExists('comments');
     }
 }

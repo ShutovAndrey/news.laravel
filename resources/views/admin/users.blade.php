@@ -22,8 +22,8 @@
                                     <h5>Admin</h5>
                                    @else <h5>User</h5>
                                 @endif
-                                <form method="post" action="{{ route('admin.users.destroy', $item) }}">
-                                    <a href="{{ route('admin.users.edit', $item) }}" type="button" class="btn btn-dark">Изменить</a>
+                                <form method="post" action="{{ route('admin.user.destroy', $item) }}">
+                                    <a href="{{ route('admin.user.edit', $item) }}" type="button" class="btn btn-dark">Изменить</a>
                                     @csrf
                                     @method('DELETE')
                                     <input type="submit" class="btn btn-danger" value="Удалить">

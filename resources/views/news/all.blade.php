@@ -7,22 +7,36 @@
 @endsection
 
 @section('content')
-
     <h1>Новости</h1>
     <div class="category-nav">
         @if ($category)
-            <ul class="nav nav-tabs">
-                @forelse($category as $item)
-                    <li class="nav-item "> <!--докрутить -->
-                        <a href="{{ route('category', $item['category_url']) }}" class=" nav-link">
-                            {{ $item['name'] }}
-                        </a>
-                    </li>
-                @empty
-                    Новости без категорий
-                @endforelse
-            </ul>
+            <div class="btn-group dropright">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Категории
+                </button>
+                <div class="dropdown-menu">
+                    @forelse($category as $item)
+                        <li class="nav-item ">
+                            <a href="{{ route('category', $item['category_url']) }}" class=" nav-link">
+                                {{ $item['name'] }}
+                            </a>
+                        </li>
+                    @empty
+                        Новости без категорий
+                    @endforelse
+                </div>
+            </div>
         @endif
+
+            <form method="POST" action="  {{ route('search') }}"
+                  enctype="multipart/form-data">
+                @csrf
+                <div class="form-group mx-sm-3 mb-2">
+                    <label for="search" class="sr-only">Поиск</label>
+                    <input class="form-control" name="search" id="search" placeholder="Поиск">
+                </div>
+                <button type="submit" class="btn btn-primary mb-2">Поиск</button>
+            </form>
 
     </div>
     <br>
@@ -43,7 +57,9 @@
 
         @endforelse
     </div>
+
     {{ $news->links()  }}
+
 @endsection
 
 

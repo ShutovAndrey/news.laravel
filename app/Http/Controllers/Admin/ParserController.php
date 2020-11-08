@@ -62,9 +62,7 @@ class ParserController extends Controller
     {
         $request->validate(ParsingResourse::rules());
         $link=new ParsingResourse;
-      //  dd($request->all());
        $link->fill($request->all())->save();
-     //  dd($link);
         return redirect()->route('admin.home')
             ->with(['success' => 'Ссылка на ресурс добавлена!']);
     }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\News;
 use Illuminate\Http\Request;
 use App\News;
 use App\Category;
+use App\Comment;
+
 
 class NewsController
 {
@@ -17,7 +19,10 @@ class NewsController
     }
 
     public function show(News $news) {
-        return view('news.newsOne')->with('news', $news);
+        return view('news.newsOne')->with([
+            'news'=> $news,
+            'comments' => Comment::query()->where('news_id', $news->id)->get()
+        ]);
     }
 
     public function categoryNews($name) {
@@ -26,6 +31,16 @@ class NewsController
             'news'=> $category->news()->paginate(8),
             'category'=>Category::all()
         ]);
+    }
+
+    public function search(Request $request)
+    {
+
+        return view('news.all')->with(
+            [
+                'news' => News::search($request->search)->get(),
+                'category' => Category::all()
+            ]);
     }
 
 }

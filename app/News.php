@@ -4,6 +4,7 @@ namespace App;
 
 use App\Category;
 use Illuminate\Database\Eloquent\Model;
+use App\Comment;
 
 class News extends Model
 {
@@ -12,6 +13,11 @@ class News extends Model
     public function category(){
         return $this->belongsTo(Category::class, 'category_id')->first();
     }
+
+    public function comment(){
+        return $this->hasMany(Comment::class, 'news_id');
+    }
+
     public static function rules(){
         $category_id= (new Category())->getTable();
         return [
@@ -19,7 +25,7 @@ class News extends Model
             'text' => 'required | min:30 | max:800',
             'private' => 'sometimes|in:1',  // boolean
             'category_id' => "numeric | required | exists:{$category_id},id",
-            'image' => 'mimes: jpeg, jpg, png, bpn | max:1500'
+            'image' => 'mimes:jpeg,jpg,png,bpn | max:1500'
         ];
     }
 
