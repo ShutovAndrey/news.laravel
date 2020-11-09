@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use File;
-
-use Illuminate\Http\Request;
+use App\News;
 
 class HomeController extends Controller
 {
@@ -16,13 +14,4 @@ class HomeController extends Controller
 
     }
 
-    public function contacts()
-    {
-        return view('contacts');
-    }
-
-    public function about()
-    {
-        return view('about');
-    }
 }

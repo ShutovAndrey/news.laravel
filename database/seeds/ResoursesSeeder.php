@@ -14,9 +14,13 @@ class ResoursesSeeder extends Seeder
 
         $resourses = [
           //  ["name" => "https://www.rt.com/rss",],
-            ["name" => "https://regnum.ru/rss",],
-            ["name" => "https://lenta.ru/rss/news",],
+          //  ["name" => "https://regnum.ru/rss",],
+         //   ["name" => "https://lenta.ru/rss/news",],
          //   ["name" => "https://news.yandex.ru/auto.rss",],
+            ["name" => "https://rss.newsru.com/russia",],
+            ["name" => "https://rss.newsru.com/world",],
+         //   ["name" => "https://news.yandex.ru/auto.rss",],
+          //  ["name" => "https://news.yandex.ru/auto.rss",],
          //   ["name" => "https://news.yandex.ru/auto_racing.rss",],
          //   ["name" => "https://news.yandex.ru/army.rss",],
          //   ["name" => "https://news.yandex.ru/gadgets.rss",],

@@ -1,8 +1,6 @@
 <?php
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/about', 'HomeController@about')->name('about');
-Route::get('/contacts', 'HomeController@contacts')->name('contacts');
 Route::post('/new_comment', 'CommentController@create')->name('comments.add');
 Route::match(['get','post'], '/profile', 'ProfileController@update')->name('profileUpdate');
 Route::get('/auth/{social}', 'LoginController@loginSocial')->name('loginSocial');
