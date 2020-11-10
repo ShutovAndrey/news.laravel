@@ -6,22 +6,27 @@ use Illuminate\Http\Request;
 use App\News;
 use App\Category;
 use App\Comment;
+use App\Events\PostHasViewed;
 
 
 class NewsController
 {
     public function index() {
+
         return view('news.all')->with(
             [
                 'news'=> News::query()->paginate(3),
-                'category'=>Category::all()
+                'category'=>Category::all(),
+                'comments' => Comment::query()->where('news_id', 1)->count('comment')
+
             ]);
     }
 
     public function show(News $news) {
+        event('postHasViewed', $news);
         return view('news.newsOne')->with([
             'news'=> $news,
-            'comments' => Comment::query()->where('news_id', $news->id)->get()
+            'comments' => Comment::query()->where('news_id', $news->id)->get()->sortByDesc('created_at')
         ]);
     }
 

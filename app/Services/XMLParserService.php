@@ -12,7 +12,6 @@ class XMLParserService
     public function saveNews($link) {
         $xml = XmlParser::load($link);
 
-
         $data = $xml->parse([
             'title' => ['uses' => 'channel.title'],
             'link' => ['uses' => 'channel.link'],

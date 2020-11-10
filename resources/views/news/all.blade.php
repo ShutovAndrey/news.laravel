@@ -45,8 +45,11 @@
         @forelse($news as $item)
             <div class="news-item">
                 <h2>{{ $item->title }}</h2>
-                <div class="news-img" style="background-image: url({{$item->image ?? asset('storage/def.jpg')}})">
+
+                    <img class="news-img" src="{{$item->image ?? asset('storage/def.jpg')}}" alt="news_image">
                 </div>
+        <p>Просмотров:{{ $item->view_count }} </p>
+        {{$comments}}
                 @if (!$item->private)
                     <a href="{{ route('news.NewsOne', $item->id) }}">Подробнее...</a><br>
                 @endif

@@ -22,17 +22,20 @@
         @endif
 
         @if(isset($comments))
-            <hr>
-            <h4>Комментарии</h4>
-            @foreach($comments as $comment)
-                <p><strong>{{ $comment->name }}</strong> {{ $comment->comment }}</p>
-            @endforeach
+            <div>
+                <hr>
+                <h4>Комментарии</h4>
+                <div id="comment_block">
+                @foreach($comments as $comment)
+                    <p><strong>{{ $comment->name }}</strong> {{ $comment->comment }}</p>
+                @endforeach
+            </div>
         @endif
 
         <hr>
         <div>
             <h4>Добавить комментарий</h4>
-            <form method="POST" action="">
+            <form id="comment_form" method="POST" action="">
                 <meta name="csrf-token" content="{{ csrf_token() }}">
                 <div class="form-group">
                     <label for="name">Ваше имя</label>
@@ -43,7 +46,7 @@
                     <textarea class="form-control" id="comment" name="comment"
                               placeholder="Новый комментарий"></textarea>
                 </div>
-                <input type="hidden" name="news_id" value="{{ $news->id }}">
+                <input type="hidden" name="news_id" id="news_id" value="{{ $news->id }}">
             </form>
             <button id="send" class="btn btn-primary">
                 Отправить
@@ -55,6 +58,9 @@
 
         window.onload = function () {
             document.getElementById('send').onclick = function () {
+                const name = document.getElementById("name").value;
+                const comment = document.getElementById("comment").value;
+                const news_id = document.getElementById("news_id").value;
                 (async () => {
                     const response = await fetch('/new_comment', {
                         method: 'POST',
@@ -63,18 +69,22 @@
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         }),
                         body: JSON.stringify({
-                            id: '1',
-                            name: 'Олег Иванов',
-                            age: '22',
+                            name: name,
+                            comment: comment,
+                            news_id: news_id,
                         }), // body data type must match "Content-Type" header
                     });
                     const answer = await response.json();
+                    if (answer === 'ok') {
+                        document.getElementById('comment_block').insertAdjacentHTML('afterbegin', `<p><strong>${name} </strong>${comment}</p>`);
+                        document.getElementById("comment_form").reset();
+                    } else {
+                        console.log('error');
+                    }
 
-                    console.log(answer);
                 })();
             }
         }
-
 
 
     </script>

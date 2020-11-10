@@ -36,10 +36,10 @@ class ProfileController extends Controller
 
     protected function validateRules(){
         return [
-            'name' => 'required|string|max:30',
-            'email'=> 'required|email|unique:users,email,' . Auth::id(),
-            'password' => 'required',
-            'newPassword' => 'required|string|min:3'
+            'name' => 'string|max:30',
+            'email'=> 'email',
+            'password' => 'nullable|string|min:3',
+            'newPassword' => 'nullable|string|min:3'
 
         ];
     }

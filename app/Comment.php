@@ -12,4 +12,12 @@ class Comment extends Model
     public function news(){
         return $this->belongsTo(News::class, 'news_id')->first();
     }
+
+    public static function rules(){
+        return [
+            'name' => 'required | min:3 | max:25',
+            'comment' => 'required | min:3 | max:300',
+            'news_id' => 'required|integer',
+        ];
+    }
 }
