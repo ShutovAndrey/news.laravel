@@ -11,7 +11,8 @@
     <div class="category-nav">
         @if ($category)
             <div class="btn-group dropright">
-                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
                     Категории
                 </button>
                 <div class="dropdown-menu">
@@ -28,38 +29,38 @@
             </div>
         @endif
 
-            <form method="POST" action="  {{ route('search') }}"
-                  enctype="multipart/form-data">
-                @csrf
-                <div class="form-group mx-sm-3 mb-2">
-                    <label for="search" class="sr-only">Поиск</label>
-                    <input class="form-control" name="search" id="search" placeholder="Поиск">
-                </div>
-                <button type="submit" class="btn btn-primary mb-2">Поиск</button>
-            </form>
+        <form method="POST" action="  {{ route('search') }}"
+              enctype="multipart/form-data">
+            @csrf
+            <div class="form-group mx-sm-3 mb-2">
+                <label for="search" class="sr-only">Поиск</label>
+                <input class="form-control" name="search" id="search" placeholder="Поиск">
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Поиск</button>
+        </form>
 
     </div>
     <br>
     <div class="news-container">
 
         @forelse($news as $item)
+
             <div class="news-item">
                 <h2>{{ $item->title }}</h2>
 
-                    <img class="news-img" src="{{$item->image ?? asset('storage/def.jpg')}}" alt="news_image">
-                </div>
-        <p>Просмотров:{{ $item->view_count }} </p>
-        {{$comments}}
-                @if (!$item->private)
-                    <a href="{{ route('news.NewsOne', $item->id) }}">Подробнее...</a><br>
-                @endif
+                <img class="news-img" src="{{$item->image ?? asset('storage/def.jpg')}}" alt="news_image">
             </div>
-            <hr>
-        @empty
-            <p>Нет новостей</p>
-
-        @endforelse
+            <p>Просмотров:{{ $item->view_count }} </p>
+            @if (!$item->private)
+                <a href="{{ route('news.NewsOne', $item->id) }}">Подробнее...</a><br>
+            @endif
     </div>
+    <hr>
+    @empty
+        <p>Нет новостей</p>
+    @endforelse
+        </div>
+
 
     {{ $news->links()  }}
 

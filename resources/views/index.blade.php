@@ -12,10 +12,11 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <h2>welcome on board</h2>
+                       {{ dd($news[0]) }}
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 @endsection
