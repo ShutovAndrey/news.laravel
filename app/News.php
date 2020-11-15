@@ -4,44 +4,37 @@ namespace App;
 
 use App\Category;
 use Illuminate\Database\Eloquent\Model;
+use App\Comment;
 
 class News extends Model
 {
-    protected $fillable = ['title', 'text', 'private', 'image'];
-   /* public static function getNews()
-    {
+    protected $fillable = ['title', 'text', 'private', 'image', 'category_id'];
 
-
-
-        $arr=json_decode((\File::get(storage_path() . '\news.json')), true);
-        $news=[];
-        foreach ($arr as $item){
-            $news[]=(array)$item;
-        }
-        return $news;
-       // return static::$news;
+    public function category(){
+        return $this->belongsTo(Category::class, 'category_id')->first();
     }
 
-    /*
-     * фильтр по массиву. ищу новость по id
-     */
-   /* public static function getNewsId($id)
-    {
-       // dd(static::getNews()[array_search(7, array_column(static::getNews(), 'id'))]);
-        return static::getNews()[array_search($id, array_column(static::getNews(), 'id'))];
-
+    public function comment(){
+        return $this->hasMany(Comment::class, 'news_id');
     }
 
-    public static function getNewsByCategoryName($name) {
+    public static function rules(){
+        $category_id= (new Category())->getTable();
+        return [
+            'title' => 'required | min:10 | max:25',
+            'text' => 'required | min:30 | max:800',
+            'private' => 'sometimes|in:1',  // boolean
+            'category_id' => "numeric | required | exists:{$category_id},id",
+            'image' => 'mimes:jpeg,jpg,png,bpn | max:1500'
+        ];
+    }
 
-        $id = Category::getCategoryByName($name)['id'];
-        $news = [];
-        foreach (static::getNews() as $item) {
-            if ($item['category_id'] == $id) {
-                $news[] = $item;
-            }
-        }
-        return $news;
-    }*/
-
+    public static function attributes(){
+        return [
+            'title' => 'Заголовок новости',
+            'text' => 'Текст новости',
+            'category_id' => "Категория новости",
+            'image' => 'Изображение'
+        ];
+    }
 }

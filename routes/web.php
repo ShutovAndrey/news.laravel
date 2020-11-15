@@ -1,17 +1,28 @@
 <?php
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/about', 'HomeController@about')->name('about');
-Route::get('/contacts', 'HomeController@contacts')->name('contacts');
+Route::match(['get','post'], '/profile', 'ProfileController@update')->name('profileUpdate');
+Route::get('/auth/{social}', 'LoginController@loginSocial')->name('loginSocial');
+Route::get('/auth/{social}/response', 'LoginController@responseSocial')->name('responseSocial');
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth', 'is_admin']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
 
 Route::group([
     'prefix' => 'admin',
     'namespace'=> 'Admin',
-    'as' => 'admin.'
+    'as' => 'admin.',
+    'middleware' => ['auth', 'is_admin']
 ], function () {
-    Route::get('/', 'IndexController')->name('index');
-    Route::match(['get','post'], '/add', 'News\NewsController@add')->name('add');
-    Route::get('/test2', 'News\NewsController@test2')->name('test2');
+    Route::get('/', 'IndexController')->name('home');
+    Route::get('/user/toggleAdmin/{user}', 'UserController@toggleAdmin')->name('toggleAdmin');
+    Route::get('/parser', 'ParserController@index')->name('parser');
+    Route::get('/rsslink', 'ParserController@create')->name('rsslink');
+    Route::post('/rssStore', 'ParserController@rssStore')->name('rssStore');
+
+    Route::resource('/user', 'UserController')->except(['show']);
+    Route::resource('/news', 'News\CrudNewsController')->except(['show']);
+    Route::resource('/category', 'CategoryController')->except(['show']);
 });
 
 Route::group([
@@ -21,8 +32,9 @@ Route::group([
 Route::get('/', 'NewsController@index')->name('news.all');
 Route::get('/{news}', 'NewsController@show')->name('news.NewsOne');
 Route::get('/category/{theme}', 'NewsController@categoryNews')->name('category');
+Route::post('/search', 'NewsController@search')->name('search');
+Route::post('/new_comment', 'CommentController@create')->name('comments.add');
 });
 
 Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');

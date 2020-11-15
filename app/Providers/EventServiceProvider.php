@@ -15,6 +15,12 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
+        \SocialiteProviders\Manager\SocialiteWasCalled::class => [
+            'SocialiteProviders\\VKontakte\\VKontakteExtendSocialite@handle',
+            'SocialiteProviders\\GitHub\\GitHubExtendSocialite@handle',
+            'SocialiteProviders\\Instagram\\InstagramExtendSocialite@handle',
+            'SocialiteProviders\\Yandex\\YandexExtendSocialite@handle',
+        ],
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
@@ -29,6 +35,8 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        //
+        Event::listen('postHasViewed', function ($news) {
+            $news->increment('view_count');
+        });
     }
 }
