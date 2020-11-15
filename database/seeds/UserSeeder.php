@@ -23,6 +23,5 @@ class UserSeeder extends Seeder
             'updated_at' => now()
         ]);
 
-       // factory(User::class,10)->create();
     }
 }

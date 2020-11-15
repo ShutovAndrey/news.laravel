@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
-    public function update(Request $request){
+    public function update(Request $request)
+    {
         $user = Auth::user();
         $errors = [];
         if ($request->isMethod('post')) {
@@ -30,24 +31,26 @@ class ProfileController extends Controller
             }
         }
 
-        return view('profile',[
-        'user' => $user]);
+        return view('profile', [
+            'user' => $user]);
     }
 
-    protected function validateRules(){
+    protected function validateRules()
+    {
         return [
             'name' => 'string|max:30',
-            'email'=> 'email',
+            'email' => 'email',
             'password' => 'nullable|string|min:3',
             'newPassword' => 'nullable|string|min:3'
 
         ];
     }
 
-    protected  function attributeNames(){
-return [
-    'newPassword' => 'Новый пароль'
-];
-}
+    protected function attributeNames()
+    {
+        return [
+            'newPassword' => 'Новый пароль'
+        ];
+    }
 
 }

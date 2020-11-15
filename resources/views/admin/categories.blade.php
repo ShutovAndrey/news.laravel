@@ -59,51 +59,35 @@
                     </div>
                     <div class="card-body">
                         <h2>Новая категория</h2>
-<div>
-    <form method="POST" action="  {{ route('admin.category.store') }}"
-          enctype="multipart/form-data">
-        @csrf
+                        <div>
+                            <form method="POST" action="  {{ route('admin.category.store') }}"
+                                  enctype="multipart/form-data">
+                                @csrf
 
-        <div>
-            @if($errors->has('name'))
-                <div class="alert-danger">
-                    @foreach($errors->get('name') as $error)
-                        <p>{{$error}}</p>
-                    @endforeach
-                </div>
-            @endif
-            <input id="head_category" class="form-control
+                                <div>
+                                    @if($errors->has('name'))
+                                        <div class="alert-danger">
+                                            @foreach($errors->get('name') as $error)
+                                                <p>{{$error}}</p>
+                                            @endforeach
+                                        </div>
+                                    @endif
+                                    <input id="head_category" class="form-control
                                 @if($errors->has('name')) is-invalid @endif " name="name" type="text"
-                   autofocus
-                   value="{{ old('name') ?? $category->name }}">
-        </div>
-        <button type="submit" class="btn btn-outline-dark">
-            Добавить
-        </button>
-
-    </form>
-</div>
+                                           autofocus
+                                           value="{{ old('name') ?? $category->name }}">
+                                </div>
+                                <button type="submit" class="btn btn-outline-dark">
+                                    Добавить
+                                </button>
+                            </form>
+                        </div>
 
                     </div>
                 </div>
-
             </div>
-
-
-
         </div>
 
     </div>
-    <script>
-        "use strict";
-        const buttonItems = document.querySelectorAll('.switch');
-        for (let button of buttonItems) {
-            console.log(button)
-            button.addEventListener('click', (evt) => {
-//console.log(evt.target.parentElement.parentNode)
-                evt.target.parentElement.parentNode.querySelector('.cant-see').classList.toggle('invisible');
-                evt.target.parentElement.parentNode.querySelector('.can-see').classList.toggle('invisible');
-            });
-        }
-    </script>
+
 @endsection

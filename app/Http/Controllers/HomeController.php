@@ -9,10 +9,14 @@ class HomeController extends Controller
 
     public function index()
     {
+        $allNews = News::all();
+        $news = $allNews->random(11);
+        foreach ($news as $item) {
+            $item->text = substr($item->text, 0, 250) . "… ";
+        }
         return view('index')->with(
             [
-                'news'=> News::take(10)->get()->toArray(),
-
+                'news' => $news,
             ]);
 
     }

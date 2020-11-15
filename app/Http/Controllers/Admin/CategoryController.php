@@ -18,20 +18,20 @@ class CategoryController extends Controller
     {
         $categories = Category::all();
         $category = new Category();
-        return view('admin.categories')->with(['categories' => $categories, 'category'=> $category]);
+        return view('admin.categories')->with(['categories' => $categories, 'category' => $category]);
     }
 
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
 
-        $category=new Category;
+        $category = new Category;
         $category->category_url = Str::slug($request->name);
         $category->fill($request->all())->save();
         return redirect()->route('admin.category.index')
@@ -42,26 +42,26 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit(Category $category)
     {
         $categories = Category::all();
-        return view('admin.categories')->with(['categories' => $categories, 'category'=> $category]);
+        return view('admin.categories')->with(['categories' => $categories, 'category' => $category]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Category $categories, Request $request)
     {
         $category = $categories->find($request->id);
-        $category['category_url']= Str::slug($request->name);
+        $category['category_url'] = Str::slug($request->name);
         $category->fill($request->except('_token'))->save();
 
         return redirect()->route('admin.category.index')->with('success', 'Категория изменена');
@@ -70,7 +70,7 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Category $category)

@@ -13,21 +13,19 @@ class ResoursesSeeder extends Seeder
     {
 
         $resourses = [
-            //   ["name" => "https://www.rt.com/rss",], на англ
             ["name" => "https://regnum.ru/rss",],
             ["name" => "https://lenta.ru/rss/news",],
             ["name" => "https://news.yandex.ru/auto.rss",],
-            //   ["name" => "https://news.yandex.ru/auto.rss",],
-            //   ["name" => "https://news.yandex.ru/auto_racing.rss",],
+            ["name" => "https://news.yandex.ru/auto.rss",],
+            ["name" => "https://news.yandex.ru/auto_racing.rss",],
             ["name" => "https://news.yandex.ru/army.rss",],
-            //   ["name" => "https://news.yandex.ru/gadgets.rss",],
-            //    ["name" => "https://news.yandex.ru/index.rss",],
-            //    ["name" => "https://news.yandex.ru/martial_arts.rss",],
-            //   ["name" => "https://news.yandex.ru/communal.rss",],
-            //   ["name" => "https://news.yandex.ru/health.rss",],
-            //   ["name" => "https://news.yandex.ru/games.rss",],
-            //   ["name" => "https://news.yandex.ru/internet.rss",],
-            //  ["name" => "https://news.yandex.ru/cyber_sport.rss",],
+            ["name" => "https://news.yandex.ru/gadgets.rss",],
+            ["name" => "https://news.yandex.ru/index.rss",],
+            ["name" => "https://news.yandex.ru/martial_arts.rss",],
+            ["name" => "https://news.yandex.ru/communal.rss",],
+            ["name" => "https://news.yandex.ru/health.rss",],
+            ["name" => "https://news.yandex.ru/games.rss",],
+            ["name" => "https://news.yandex.ru/cyber_sport.rss",],
         ];
 
         DB::table('parsing_resourses')->insert($resourses);

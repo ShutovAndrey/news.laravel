@@ -5,6 +5,8 @@
  */
 
 require('./bootstrap');
+require('./comment');
+require('./categories');
 
 window.Vue = require('vue');
 

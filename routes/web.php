@@ -1,7 +1,6 @@
 <?php
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::post('/new_comment', 'CommentController@create')->name('comments.add');
 Route::match(['get','post'], '/profile', 'ProfileController@update')->name('profileUpdate');
 Route::get('/auth/{social}', 'LoginController@loginSocial')->name('loginSocial');
 Route::get('/auth/{social}/response', 'LoginController@responseSocial')->name('responseSocial');
@@ -24,7 +23,6 @@ Route::group([
     Route::resource('/user', 'UserController')->except(['show']);
     Route::resource('/news', 'News\CrudNewsController')->except(['show']);
     Route::resource('/category', 'CategoryController')->except(['show']);
-
 });
 
 Route::group([
@@ -35,6 +33,7 @@ Route::get('/', 'NewsController@index')->name('news.all');
 Route::get('/{news}', 'NewsController@show')->name('news.NewsOne');
 Route::get('/category/{theme}', 'NewsController@categoryNews')->name('category');
 Route::post('/search', 'NewsController@search')->name('search');
+Route::post('/new_comment', 'CommentController@create')->name('comments.add');
 });
 
 Auth::routes();
