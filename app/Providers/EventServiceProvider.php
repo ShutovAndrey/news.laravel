@@ -18,7 +18,6 @@ class EventServiceProvider extends ServiceProvider
         \SocialiteProviders\Manager\SocialiteWasCalled::class => [
             'SocialiteProviders\\VKontakte\\VKontakteExtendSocialite@handle',
             'SocialiteProviders\\GitHub\\GitHubExtendSocialite@handle',
-            'SocialiteProviders\\Instagram\\InstagramExtendSocialite@handle',
             'SocialiteProviders\\Yandex\\YandexExtendSocialite@handle',
         ],
         Registered::class => [

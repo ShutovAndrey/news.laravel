@@ -23,8 +23,7 @@ class XMLParserService
         foreach ($data['news'] as $news) {
             if (!$news['description']){
                 unset($news);
-                continue;  //в одном из ресурсов у меня такое попадалось,
-                // вообще наверное полезно все поля из fillable проверять, чтобы ошибки не вылетали
+                continue;
             }
             if (!$news['category']) {
                 $categoryName = $data['title'];
