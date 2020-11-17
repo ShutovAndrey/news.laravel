@@ -1,4 +1,4 @@
-Need to use reddis.
+Need to use reddis to parse news.
 
 after running app, start
 
