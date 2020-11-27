@@ -11,7 +11,7 @@
         @if ($news)
             @if (!$news->private)
                 <h2>{{ $news->title }}</h2>
-                <img class="One-img" src="{{$news->image  ?? asset('storage/def.jpg')}}" alt="news_image">
+                <img class="one-img" src="{{$news->image  ?? asset('storage/def.jpg')}}" alt="news_image">
                 <p>{{ $news->text }}</p>
             @else
                 Зарегистрируйтесь для просмотра
